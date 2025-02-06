@@ -19,6 +19,7 @@ public class Produto {
     private String nome;
     @Positive
     private double preco;
+
     private Integer estoque;
     private String data_validade;
     private String descricao;

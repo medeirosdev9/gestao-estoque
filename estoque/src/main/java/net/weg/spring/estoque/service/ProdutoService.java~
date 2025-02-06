@@ -17,7 +17,7 @@ public class ProdutoService {
     private CategoriaService categoriaService;
 
     public ProdutoResponseDTO create(ProdutoRequestDTO produto) {
-        return EntityToDto(repository.save(DtoToEntity(produto)));
+        return EntityToDto(repository.save(produto));
     }
 
     public Produto update(Produto produto, Integer id) {

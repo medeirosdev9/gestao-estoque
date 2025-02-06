@@ -20,5 +20,5 @@ public class Fabricante {
     private String nome;
     private String descricao;
     @OneToMany(mappedBy = "fabricante")
-    private List<Produto> produtos = new ArrayList<>();
+    private List<Produto> produtos;
 }

@@ -1,6 +1,7 @@
 package net.weg.spring.estoque.service;
 
 import lombok.AllArgsConstructor;
+import net.weg.spring.estoque.controller.dto.Response.CategoriaResponseDTO;
 import net.weg.spring.estoque.model.Categoria;
 import net.weg.spring.estoque.repository.CategoriaRepository;
 import org.springframework.stereotype.Service;
@@ -11,8 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 public class CategoriaService {
     private CategoriaRepository repository;
-    public Categoria create(Categoria categoria) {
-        return repository.save(categoria);
+    public CategoriaResponseDTO create(Categoria categoria) {
+        return EntityToDto(repository.save(categoria));
     }
 
     public Categoria update(Categoria categoria, Integer id) {
@@ -25,11 +26,23 @@ public class CategoriaService {
         repository.deleteById(id);
     }
 
-    public Categoria findById(Integer id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
+    public CategoriaResponseDTO findById(Integer id) {
+        return EntityToDto(repository.findById(id).orElseThrow(() -> new RuntimeException("Categoria não encontrada")));
     }
 
     public List<Categoria> findAll() {
         return repository.findAll();
+    }
+
+    public CategoriaResponseDTO EntityToDto(Categoria categoria) {
+        return new CategoriaResponseDTO(categoria.getId(), categoria.getNome(), categoria.getDescricao());
+    }
+
+    public Categoria DtoToEntity(CategoriaResponseDTO categoriaResponseDTO) {
+        Categoria categoria = new Categoria();
+        categoria.setId(categoriaResponseDTO.getId());
+        categoria.setNome(categoriaResponseDTO.getNome());
+        categoria.setDescricao(categoriaResponseDTO.getDescricao());
+        return categoria;
     }
 }

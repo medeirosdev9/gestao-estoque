@@ -1,6 +1,7 @@
 package net.weg.spring.estoque.controller;
 
 import lombok.AllArgsConstructor;
+import net.weg.spring.estoque.controller.dto.Response.CategoriaResponseDTO;
 import net.weg.spring.estoque.model.Categoria;
 import net.weg.spring.estoque.service.CategoriaService;
 import org.springframework.http.HttpStatus;
@@ -13,12 +14,11 @@ import java.util.List;
 @RequestMapping("/categories")
 @AllArgsConstructor
 public class CategoriaController {
+    
     private CategoriaService service;
-
     @PostMapping
-    public ResponseEntity<Categoria> create(@RequestBody Categoria categoria) {
-        categoria = service.create(categoria);
-        return new ResponseEntity<>(categoria, HttpStatus.OK);
+    public ResponseEntity<CategoriaResponseDTO> create(@RequestBody Categoria categoria) {
+        return new ResponseEntity<>(service.create(categoria), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
@@ -34,10 +34,9 @@ public class CategoriaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Categoria> findById(@PathVariable Integer id) {
+    public ResponseEntity<CategoriaResponseDTO> findById(@PathVariable Integer id) {
         try {
-            Categoria categoria = service.findById(id);
-            return new ResponseEntity<>(categoria, HttpStatus.OK);
+            return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

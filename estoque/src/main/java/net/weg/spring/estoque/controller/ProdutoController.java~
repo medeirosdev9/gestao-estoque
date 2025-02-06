@@ -1,8 +1,6 @@
 package net.weg.spring.estoque.controller;
 
 import lombok.AllArgsConstructor;
-import net.weg.spring.estoque.controller.dto.Request.ProdutoRequestDTO;
-import net.weg.spring.estoque.controller.dto.Response.ProdutoResponseDTO;
 import net.weg.spring.estoque.model.Produto;
 import net.weg.spring.estoque.service.ProdutoService;
 import org.springframework.http.HttpStatus;
@@ -18,8 +16,9 @@ public class ProdutoController {
     private ProdutoService service;
 
     @PostMapping
-    public ResponseEntity<ProdutoResponseDTO> create(@RequestBody ProdutoRequestDTO produto) {
-        return new ResponseEntity<>(service.create(produto), HttpStatus.OK);
+    public ResponseEntity<Produto> create(@RequestBody Produto produto) {
+        produto = service.create(produto);
+        return new ResponseEntity<>(produto, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")

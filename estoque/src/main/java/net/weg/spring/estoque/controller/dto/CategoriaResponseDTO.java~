@@ -1,0 +1,2 @@
+package net.weg.spring.estoque.controller.dto;public class CategoriaResponseDTO {
+}

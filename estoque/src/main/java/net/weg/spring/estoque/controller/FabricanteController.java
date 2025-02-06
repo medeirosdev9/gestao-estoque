@@ -1,6 +1,7 @@
 package net.weg.spring.estoque.controller;
 
 import lombok.AllArgsConstructor;
+import net.weg.spring.estoque.controller.dto.Response.FabricanteResponseDTO;
 import net.weg.spring.estoque.model.Fabricante;
 import net.weg.spring.estoque.service.FabricanteService;
 import org.springframework.http.HttpStatus;
@@ -15,36 +16,33 @@ public class FabricanteController {
     private FabricanteService service;
 
     @PostMapping
-    public ResponseEntity<Fabricante> create(@RequestBody Fabricante fabricante) {
-        fabricante = service.create(fabricante);
-        return new ResponseEntity<>(fabricante, HttpStatus.OK);
+    public ResponseEntity<FabricanteResponseDTO> create(@RequestBody Fabricante fabricante) {
+        return new ResponseEntity<>(service.create(fabricante) , HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Fabricante> update(@RequestBody Fabricante fabricante, @PathVariable Integer id) {
-        fabricante = service.update(fabricante, id);
-        return new ResponseEntity<>(fabricante, HttpStatus.OK);
+    public ResponseEntity<FabricanteResponseDTO> update(@RequestBody Fabricante fabricante, @PathVariable Integer id) {
+        return new ResponseEntity<>(service.update(fabricante, id), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> delete(@PathVariable Integer id) {
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Fabricante> findById(@PathVariable Integer id) {
+    public ResponseEntity<FabricanteResponseDTO> findById(@PathVariable Integer id) {
         try {
-            Fabricante fabricante = service.findById(id);
-            return new ResponseEntity<>(fabricante, HttpStatus.OK);
+            return new ResponseEntity<>( service.findById(id), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @GetMapping
-    public ResponseEntity<List<Fabricante>> findAll() {
-        List<Fabricante> fabricantes = service.findAll();
+    public ResponseEntity<List<FabricanteResponseDTO>> findAll() {
+        List<FabricanteResponseDTO> fabricantes = service.findAll();
         if (!fabricantes.isEmpty()) {
             return new ResponseEntity<>(fabricantes, HttpStatus.OK);
         }

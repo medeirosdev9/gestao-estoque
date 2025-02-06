@@ -5,6 +5,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -16,4 +19,6 @@ public class Categoria {
     @NotNull
     private String nome;
     private String descricao;
+    @OneToMany(mappedBy = "categoria")
+    private List<Produto> produtos;
 }
