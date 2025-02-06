@@ -13,12 +13,17 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "fabricantes")
 public class Fabricante {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @NotNull
+    @Column(nullable = false)
     private String nome;
+
     private String descricao;
+
     @OneToMany(mappedBy = "fabricante")
     private List<Produto> produtos;
 }

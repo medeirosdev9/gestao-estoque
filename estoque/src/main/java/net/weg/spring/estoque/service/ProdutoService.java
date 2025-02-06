@@ -12,12 +12,17 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class ProdutoService {
+
     private ProdutoRepository repository;
     private FabricanteService fabricanteService;
     private CategoriaService categoriaService;
 
-    public ProdutoResponseDTO create(ProdutoRequestDTO produto) {
-        return EntityToDto(repository.save(DtoToEntity(produto)));
+    public Produto create(ProdutoRequestDTO produtoDto) {
+        if(repository.existsByBarcode(produtoDto)) {
+            throw new RuntimeException();
+        }
+        Produto produto = produtoDto.convert();
+        return repository.save(produto);
     }
 
     public Produto update(Produto produto, Integer id) {

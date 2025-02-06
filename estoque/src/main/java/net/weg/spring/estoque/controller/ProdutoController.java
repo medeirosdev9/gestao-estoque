@@ -1,5 +1,6 @@
 package net.weg.spring.estoque.controller;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import net.weg.spring.estoque.controller.dto.Request.ProdutoRequestDTO;
 import net.weg.spring.estoque.controller.dto.Response.ProdutoResponseDTO;
@@ -18,8 +19,13 @@ public class ProdutoController {
     private ProdutoService service;
 
     @PostMapping
-    public ResponseEntity<ProdutoResponseDTO> create(@RequestBody ProdutoRequestDTO produto) {
-        return new ResponseEntity<>(service.create(produto), HttpStatus.OK);
+    public ResponseEntity<Produto> createProduct(@RequestBody @Valid ProdutoRequestDTO produtoDto) {
+        try {
+            Produto produto = service.create(produtoDto);
+            return new ResponseEntity<>(produto, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping("/{id}")

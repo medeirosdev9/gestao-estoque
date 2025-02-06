@@ -4,29 +4,54 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
+@Builder
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "produto")
+@AllArgsConstructor
+@Table(name = "produtos")
 public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @NotNull
+
+    @NonNull
+    @Column(nullable = false)
     private String nome;
-    @Positive
+
+    @NonNull
+    @Column(nullable = false)
     private double preco;
+
+    @NonNull
+    @Column(nullable = false)
     private Integer estoque;
+
+    @NonNull
+    @Column(nullable = false)
     private String data_validade;
+
+    @NonNull
     private String descricao;
+
+    @NonNull
+    @Column(unique = true)
     private String codigo_barras;
+
+    @NonNull
+    @Column(nullable = false)
     private double peso;
+
+    @NonNull
+    @Column(nullable = false)
     private double medida;
+
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Fabricante fabricante;
+
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Categoria categoria;
 }

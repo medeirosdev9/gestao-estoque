@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/categories")
 @AllArgsConstructor
 public class CategoriaController {
-    
+
     private CategoriaService service;
     @PostMapping
     public ResponseEntity<CategoriaResponseDTO> create(@RequestBody Categoria categoria) {
@@ -46,7 +46,7 @@ public class CategoriaController {
     public ResponseEntity<List<Categoria>> findAll() {
         List<Categoria> categorias = service.findAll();
         if (!categorias.isEmpty()) {
-            return new ResponseEntity<>(categorias, HttpStatus.OK);
+            return new ResponseEntity<>(categorias, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

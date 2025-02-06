@@ -11,6 +11,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class CategoriaService {
+
     private CategoriaRepository repository;
     public CategoriaResponseDTO create(Categoria categoria) {
         return EntityToDto(repository.save(categoria));
