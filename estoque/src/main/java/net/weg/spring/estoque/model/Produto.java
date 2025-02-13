@@ -44,8 +44,7 @@ public class Produto {
     @Column(nullable = false)
     private double medida;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Fabricante fabricante;
 
     @ManyToOne(cascade = CascadeType.ALL)

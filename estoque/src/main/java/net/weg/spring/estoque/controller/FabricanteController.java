@@ -25,6 +25,7 @@ public class FabricanteController {
         return new ResponseEntity<>(service.update(fabricante, id), HttpStatus.OK);
     }
 
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         service.delete(id);

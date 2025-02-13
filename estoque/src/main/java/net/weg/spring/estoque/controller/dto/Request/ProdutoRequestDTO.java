@@ -35,7 +35,7 @@ public class ProdutoRequestDTO {
     @NotNull
     private double peso;
 
-    @NotBlank
+    @NotNull
     private double medida;
 
     @NotNull

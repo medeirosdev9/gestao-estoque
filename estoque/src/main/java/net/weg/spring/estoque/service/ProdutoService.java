@@ -27,6 +27,7 @@ public class ProdutoService {
 
     public Produto update(Produto produto, Integer id) {
         produto.setId(id);
+        System.out.println(produto);
         return repository.save(produto);
     }
 
