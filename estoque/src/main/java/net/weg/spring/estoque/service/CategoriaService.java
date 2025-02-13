@@ -1,6 +1,7 @@
 package net.weg.spring.estoque.service;
 
 import lombok.AllArgsConstructor;
+import net.weg.spring.estoque.controller.dto.Request.CategoryPostRequestDTO;
 import net.weg.spring.estoque.controller.dto.Response.CategoriaResponseDTO;
 import net.weg.spring.estoque.model.Categoria;
 import net.weg.spring.estoque.repository.CategoriaRepository;
@@ -13,8 +14,12 @@ import java.util.List;
 public class CategoriaService {
 
     private CategoriaRepository repository;
-    public CategoriaResponseDTO create(Categoria categoria) {
-        return EntityToDto(repository.save(categoria));
+    public Categoria create(CategoryPostRequestDTO categoriaDto) {
+        if(repository.existsByNome(categoriaDto.nome())) {
+            throw new RuntimeException();
+        }
+        Categoria categoria = categoriaDto.convert();
+        return repository.save(categoria);
     }
 
     public Categoria update(Categoria categoria, Integer id) {

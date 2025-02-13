@@ -1,11 +1,16 @@
 package net.weg.spring.estoque.repository;
 
-import net.weg.spring.estoque.controller.dto.Request.ProdutoRequestDTO;
+import jakarta.validation.constraints.NotNull;
+import net.weg.spring.estoque.model.Categoria;
 import net.weg.spring.estoque.model.Produto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
-    boolean existsByBarcode(ProdutoRequestDTO produtoDto);
+
+    Page<Produto> findByCategoria(Pageable pageable, Categoria categoria);
+    boolean existsByBarras(String barcode);
 }

@@ -1,6 +1,7 @@
 package net.weg.spring.estoque.controller.dto.Response;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 @Data

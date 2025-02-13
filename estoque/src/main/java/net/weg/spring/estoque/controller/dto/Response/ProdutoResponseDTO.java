@@ -12,7 +12,7 @@ public class ProdutoResponseDTO {
     private Integer estoque;
     private String data_validade;
     private String descricao;
-    private String codigo_barras;
+    private String barras;
     private double peso;
     private double medida;
     private FabricanteResponseDTO fabricante;

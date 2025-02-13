@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface CategoriaRepository extends JpaRepository<Categoria, Integer> {
-    List<Categoria> findByName(String nome);
+
+    boolean existsByNome(String nome);
 }

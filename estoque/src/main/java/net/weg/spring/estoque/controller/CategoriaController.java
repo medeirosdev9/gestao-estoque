@@ -1,6 +1,8 @@
 package net.weg.spring.estoque.controller;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import net.weg.spring.estoque.controller.dto.Request.CategoryPostRequestDTO;
 import net.weg.spring.estoque.controller.dto.Response.CategoriaResponseDTO;
 import net.weg.spring.estoque.model.Categoria;
 import net.weg.spring.estoque.service.CategoriaService;
@@ -11,14 +13,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/categories")
+@RequestMapping("/categorias")
 @AllArgsConstructor
 public class CategoriaController {
 
     private CategoriaService service;
     @PostMapping
-    public ResponseEntity<CategoriaResponseDTO> create(@RequestBody Categoria categoria) {
-        return new ResponseEntity<>(service.create(categoria), HttpStatus.OK);
+    public ResponseEntity<Categoria> create(@RequestBody @Valid CategoryPostRequestDTO categoriaDto) {
+        try {
+            Categoria categoria = service.create(categoriaDto);
+            return new ResponseEntity<>(categoria, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping("/{id}")

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
-@RequestMapping("/manufactures")
+@RequestMapping("/fabricantes")
 @AllArgsConstructor
 public class FabricanteController {
     private FabricanteService service;

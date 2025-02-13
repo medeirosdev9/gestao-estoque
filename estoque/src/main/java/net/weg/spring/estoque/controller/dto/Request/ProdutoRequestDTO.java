@@ -30,7 +30,7 @@ public class ProdutoRequestDTO {
     private String descricao;
 
     @NotNull
-    private String codigo_barras;
+    private String barras;
 
     @NotNull
     private double peso;
@@ -51,7 +51,7 @@ public class ProdutoRequestDTO {
                 .estoque(this.estoque)
                 .data_validade(this.data_validade)
                 .descricao(this.descricao)
-                .codigo_barras(this.codigo_barras)
+                .barras(this.barras)
                 .peso(this.peso)
                 .medida(this.medida)
                 .fabricante(this.fabricante)

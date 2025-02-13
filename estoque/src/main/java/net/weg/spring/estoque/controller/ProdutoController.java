@@ -3,9 +3,10 @@ package net.weg.spring.estoque.controller;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import net.weg.spring.estoque.controller.dto.Request.ProdutoRequestDTO;
-import net.weg.spring.estoque.controller.dto.Response.ProdutoResponseDTO;
-import net.weg.spring.estoque.model.Produto;
+                import net.weg.spring.estoque.model.Produto;
 import net.weg.spring.estoque.service.ProdutoService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/produtos")
 @AllArgsConstructor
 public class ProdutoController {
     private ProdutoService service;
@@ -44,13 +45,14 @@ public class ProdutoController {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<List<Produto>> findAll() {
-        List<Produto> produtos = service.findAll();
-        if (!produtos.isEmpty()) {
+    @GetMapping("/page")
+    public ResponseEntity<Page<Produto>> findAll(Pageable pageable) {
+        try {
+            Page<Produto> produtos = service.findAll(pageable);
             return new ResponseEntity<>(produtos, HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/{id}")

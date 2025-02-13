@@ -1,9 +1,6 @@
 package net.weg.spring.estoque.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import lombok.*;
 @Builder
 @Entity
@@ -37,7 +34,7 @@ public class Produto {
 
     @NonNull
     @Column(unique = true)
-    private String codigo_barras;
+    private String barras;
 
     @NonNull
     @Column(nullable = false)
@@ -47,11 +44,11 @@ public class Produto {
     @Column(nullable = false)
     private double medida;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(nullable = false)
     private Fabricante fabricante;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(nullable = false)
     private Categoria categoria;
 }
