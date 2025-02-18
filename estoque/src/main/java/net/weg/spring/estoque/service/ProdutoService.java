@@ -66,4 +66,9 @@ public class ProdutoService {
                 produto.getBarras(), produto.getMedida(), produto.getPeso(),
                 fabricanteService.EntityToDto(produto.getFabricante()), categoriaService.EntityToDto(produto.getCategoria()));
     }
+
+//    public Page<Produto> getProductsByCategoryId(Pageable pageable, Integer categoryId) {
+//        Categoria categoria = categoriaService.findById(categoryId);
+//        return repository.findByCategoria(pageable, categoria);
+//    }
 }

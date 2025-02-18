@@ -30,7 +30,7 @@ public class ProdutoResponseDTO {
                 produto.getBarras(),
                 produto.getPeso(),
                 produto.getMedida(),
-                new FabricanteResponseDTO(
+                new FabricanteResponseDTO( 
                         produto.getFabricante().getId(),
                         produto.getFabricante().getNome(),
                         produto.getFabricante().getDescricao()

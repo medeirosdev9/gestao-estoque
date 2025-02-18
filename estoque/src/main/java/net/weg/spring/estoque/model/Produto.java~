@@ -44,10 +44,10 @@ public class Produto {
     @Column(nullable = false)
     private double medida;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Fabricante fabricante;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(nullable = false)
     private Categoria categoria;
 }

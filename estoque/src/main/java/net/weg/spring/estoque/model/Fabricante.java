@@ -1,9 +1,12 @@
 package net.weg.spring.estoque.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,5 +28,6 @@ public class Fabricante {
     private String descricao;
 
     @OneToMany(mappedBy = "fabricante")
+    @JsonBackReference
     private List<Produto> produtos;
 }
